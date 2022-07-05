@@ -1,17 +1,19 @@
 package com.javastart.hellospring.controller;
 
+import java.math.BigInteger;
 import java.util.*;
 
-import com.javastart.hellospring.controller.dto.AccountEmailDTO;
 import com.javastart.hellospring.controller.dto.AccountRequestDTO;
 import com.javastart.hellospring.controller.dto.AccountResponseDTO;
 import com.javastart.hellospring.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
 
     private final AccountService accountService;
@@ -27,13 +29,14 @@ public class AccountController {
     }
 
     @PostMapping("/accounts")
-    public AccountEmailDTO createAccount(@RequestBody AccountRequestDTO accountRequestDTO){
-        return accountService.createAccount(accountRequestDTO.getName(), accountRequestDTO.getEmail(), accountRequestDTO.getBill());
+    public AccountResponseDTO createAccount(@RequestBody AccountRequestDTO accountRequestDTO){
+        //return accountService.createAccount(accountRequestDTO.getName(), accountRequestDTO.getEmail(), accountRequestDTO.getAge());
+        return accountService.createAccount(accountRequestDTO);
 
     }
 
     @GetMapping("/accounts/{id}")
-    public AccountResponseDTO getAccount(@PathVariable Long id){
+    public AccountResponseDTO getAccount(@PathVariable BigInteger id){
         return new AccountResponseDTO(accountService.getAccountById(id));
 
     }
@@ -42,7 +45,7 @@ public class AccountController {
         return accountService.getAll().stream().map(AccountResponseDTO::new).collect(Collectors.toList());
     }
     @DeleteMapping("/accounts/{id}")
-    public AccountResponseDTO delete(@PathVariable Long id){
+    public AccountResponseDTO delete(@PathVariable BigInteger id){
         return new AccountResponseDTO(accountService.deleteById(id));
     }
 }

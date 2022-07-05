@@ -4,12 +4,12 @@ public class AccountRequestDTO {
 
     private String name;
     private String email;
-    private Integer bill;
+    private Integer age;
 
-    public AccountRequestDTO(String name, String email, Integer bill) {
+    public AccountRequestDTO(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
-        this.bill = bill;
+        this.age = age;
     }
 
     public AccountRequestDTO(){
@@ -31,11 +31,11 @@ public class AccountRequestDTO {
         this.email = email;
     }
 
-    public Integer getBill() {
-        return bill;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBill(Integer bill) {
-        this.bill = bill;
+    public void setBill(Integer age) {
+        this.age = age;
     }
 }

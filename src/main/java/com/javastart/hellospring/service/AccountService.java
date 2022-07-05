@@ -1,8 +1,10 @@
 package com.javastart.hellospring.service;
 
+import java.math.BigInteger;
 import java.util.*;
 
-import com.javastart.hellospring.controller.dto.AccountEmailDTO;
+import com.javastart.hellospring.controller.dto.AccountRequestDTO;
+import com.javastart.hellospring.controller.dto.AccountResponseDTO;
 import com.javastart.hellospring.entity.Account;
 import com.javastart.hellospring.exception.AccountNotFoundException;
 import com.javastart.hellospring.repository.AccountRepository;
@@ -19,20 +21,22 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public AccountEmailDTO createAccount(String name, String email, Integer bill){
-        Account account = new Account(name, email, bill);
-        return new AccountEmailDTO(accountRepository.save(account).getEmail());
+    public AccountResponseDTO createAccount(AccountRequestDTO accountRequestDTO){
+        Account account = new Account(accountRequestDTO.getName(), accountRequestDTO.getEmail(), accountRequestDTO.getAge());
+        accountRepository.save(account);
+        return new AccountResponseDTO(account.getId(), account.getName(), account.getEmail(), account.getAge());
     }
 
-    public Account getAccountById(Long id){
-        return accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException());
+    public Account getAccountById(BigInteger id){
+        return accountRepository.findById(id).orElseThrow(() ->
+                new AccountNotFoundException("Account with id " + id + " not found"));
     }
 
     public List<Account> getAll(){
         return accountRepository.findAll();
     }
 
-    public Account deleteById(Long id){
+    public Account deleteById(BigInteger id){
         Account account = getAccountById(id);
         accountRepository.deleteById(id);
         return  account;

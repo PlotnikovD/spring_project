@@ -1,34 +1,33 @@
 package com.javastart.hellospring.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
+@Table(name = "users")
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private BigInteger id;
 
     private String name;
 
     private String email;
 
-    private Integer bill;
+    private Integer age;
 
     public Account(){
 
     }
 
-    public Account(String name, String email, Integer bill) {
+    public Account(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
-        this.bill = bill;
+        this.age = age;
     }
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 
@@ -48,12 +47,12 @@ public class Account {
         this.email = email;
     }
 
-    public Integer getBill() {
-        return bill;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBill(Integer bill) {
-        this.bill = bill;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
@@ -62,7 +61,7 @@ public class Account {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", bill=" + bill +
+                ", bill=" + age +
                 '}';
     }
 }

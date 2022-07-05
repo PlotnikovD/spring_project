@@ -2,33 +2,35 @@ package com.javastart.hellospring.controller.dto;
 
 import com.javastart.hellospring.entity.Account;
 
+import java.math.BigInteger;
+
 public class AccountResponseDTO {
 
-    private Long accountId;
+    private BigInteger id;
     private String name;
     private String email;
-    private Integer bill;
+    private Integer age;
 
-    public AccountResponseDTO(Long accountId, String name, String email, Integer bill) {
-        this.accountId = accountId;
+    public AccountResponseDTO(BigInteger id, String name, String email, Integer age) {
+        this.id = id;
         this.name = name;
         this.email = email;
-        this.bill = bill;
+        this.age = age;
     }
 
     public AccountResponseDTO(Account account){
-        accountId = account.getId();
+        id = account.getId();
         name = account.getName();
         email = account.getEmail();
-        bill = account.getBill();
+        age = account.getAge();
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public BigInteger getId() {
+        return id;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,12 +49,12 @@ public class AccountResponseDTO {
         this.email = email;
     }
 
-    public Integer getBill() {
-        return bill;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBill(Integer bill) {
-        this.bill = bill;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
 
